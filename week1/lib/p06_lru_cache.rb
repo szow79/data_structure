@@ -15,6 +15,7 @@ class LRUCache
   end
 
   def get(key)
+    @prc
   end
 
   def to_s

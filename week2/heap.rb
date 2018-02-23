@@ -15,10 +15,6 @@ class Node
     index + 2
   end
 
-  def min_child
-    [left_child, right_child].min { |c| c.val }
-  end
-
   def parent_index
     (index + 1) / 2 - 1
   end
@@ -48,8 +44,19 @@ class MinHeap
   end
 
   def pop
+     current_node = min
 
-  end
+     min_child = min_child(current_node)
+     while min_child && current_node
+
+       current_node_index = current_node.index
+       arr[current_node_index] = min_child
+       current_node = min_child(min_child)
+       min_child.index = current_node_index
+
+     end
+     arr.pop
+   end
 
   def merge(heap)
 
@@ -61,6 +68,15 @@ class MinHeap
 
   def right_child(node)
     arr[node.right_child_index]
+  end
+
+  def min_child(node)
+    children = [left_child(node), right_child(node)].compact
+    if children.length > 1
+      children[0].val > children[1].val ? children[1] : children[0]
+    else
+      children.first
+    end
   end
 
   def parent(node)
@@ -89,6 +105,11 @@ heap = MinHeap.new
 end
 
 p heap.arr.map(&:val) == [1, 3, 2, 4, 13, 7, 15, 20, 10]
+3.times do
+  heap.pop
+  p heap.arr.map(&:val)
+end
+
 # p heap.arr.map(&:index)
 
 

@@ -38,5 +38,24 @@ class Node
 
   end
 
+  def self_balance
+    all_keys = all_nodes.map(&:key).sort
+    mid_index = all_keys.length / 2
+    self.key = all_keys.slice!(mid_index)
+    self.left = nil
+    self.right = nil
+    all_keys.each do |key|
+      node.insert(key)
+    end
+    node
+  end
+
+  def all_nodes
+    return unless self
+    all = [self]
+    all += self.left.all_nodes
+    all += self.right.all_nodes
+  end
+
 end
 

@@ -1,7 +1,8 @@
 class Node
 
-  def initialize
-
+  def initialize()
+    @val = nil
+    @current = nil
   end
 end
 

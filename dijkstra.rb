@@ -10,8 +10,8 @@ class Vertice
     @neighbors = []
   end
 
-  def add(vertice)
-    @neighbors.push(vertice)
+  def add(vertice, distance)
+    @neighbors.push({vertice: vertice, distance: distance})
   end
 end
 
